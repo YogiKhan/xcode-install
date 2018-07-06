@@ -296,9 +296,19 @@ HELP
       xcodes_list.map { |x| installed.include?(x) ? "#{x} (installed)" : x }.join("\n")
     end
 
+    def list_annotated_last(xcodes_list)
+      installed = installed_versions.map(&:version)
+      xcodes_list.last
+    end
+   
     def list
       list_annotated(list_versions.sort_by(&:to_f))
     end
+
+    def last
+        list_annotated_last(list_versions.sort_by(&:to_f))
+   end
+
 
     def rm_list_cache
       FileUtils.rm_f(LIST_FILE)
